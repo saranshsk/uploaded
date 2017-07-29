@@ -2,17 +2,10 @@ Oracle enterprise database:
 
 export ORACLE_BASE=/u01/app/node004; export ORACLE_HOME=/u01/app/node004/product/12.1.0/dbhome_1; export ORACLE_OWNR=oracle; export PATH=$PATH:$ORACLE_HOME/bin; export ORACLE_SID=orcl; $ORACLE_HOME/bin/lsnrctl start; 
 
-ASSIST:
+CREATE TABLESPACE metadata_tbsp DATAFILE '/database/tablespace/metadata_tbsp.dbf' SIZE 5G;
 
-CREATE TABLESPACE node004_tbsp DATAFILE '/home/node004/database/tablespace/assist_tbsp.dbf' SIZE 30G
+CREATE USER METADATA IDENTIFIED BY METADATA DEFAULT tablespace metadata_tbsp;
 
-username - metadata
-CREATE USER METADATA IDENTIFIED BY METADATA DEFAULT tablespace node004_tbsp;
-
-username - assist_user
-CREATE USER assist_user IDENTIFIED BY assist_user DEFAULT tablespace assist_tbsp;
-
-GRANTS:
 GRANT create session TO metadata;
 GRANT create table TO metadata;
 GRANT create view TO metadata;
@@ -21,34 +14,3 @@ GRANT create any procedure TO metadata;
 GRANT create sequence TO metadata;
 GRANT create synonym TO metadata;
 GRANT UNLIMITED TABLESPACE TO metadata;
-
-
-XE database:
-username - assist_xe
-alter USER assist_xe IDENTIFIED BY assist_xe
-
-
-Informatica:
-
-CREATE TABLESPACE infa_tbsp DATAFILE 'H:\Database-Oracle\ASSIST\DATAFILE\infa_tbsp.dbf' SIZE 5G
-CREATE USER infa_owner IDENTIFIED BY infa_owner DEFAULT tablespace infa_tbsp;
-GRANT create session TO infa_owner;
-GRANT create table TO infa_owner;
-GRANT create view TO infa_owner;
-GRANT create any trigger TO infa_owner;
-GRANT create any procedure TO infa_owner;
-GRANT create sequence TO infa_owner;
-GRANT create synonym TO infa_owner;
-GRANT UNLIMITED TABLESPACE TO infa_owner;
-
-
-CREATE TABLESPACE infa_tbsp DATAFILE 'H:\Database-OracleXE\ASSIST\DATAFILE\infa_tbsp.dbf' SIZE 5G
-CREATE USER infa_owner IDENTIFIED BY infa_owner DEFAULT tablespace infa_tbsp;
-GRANT create session TO infa_owner;
-GRANT create table TO infa_owner;
-GRANT create view TO infa_owner;
-GRANT create any trigger TO infa_owner;
-GRANT create any procedure TO infa_owner;
-GRANT create sequence TO infa_owner;
-GRANT create synonym TO infa_owner;
-GRANT UNLIMITED TABLESPACE TO infa_owner;
