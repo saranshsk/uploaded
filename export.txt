@@ -35,6 +35,11 @@
  ;
  
 --------------------------------------------------------
+--  INSERTS FOR DFF_INFO TABLE
+--------------------------------------------------------
+Insert into DFF_INFO (DFF_INFO_PK,DFF_TYPE,DFF_NAME,DFF_SYSTEM,DFF_INFO,DFF_CONNECTION_INFO,DFF_FILE_DELIM,DFF_CONTAINS_HEADER,DFF_CONTAINS_TRAILER,DFF_LINES_TO_SKIP,DFF_POLL_INTERVAL,DFF_POLL_COUNT,UPDATE_USER,UPDATE_COMMENTS,UPDATE_USER_TS,UPDATE_USER_HOSTNAME,CURRENT_IND,VALID_FROM_TS,VALID_TO_TS,INSERT_TS,UPDATE_TS) values (1,'DELIMITED_FILE','test_file_*','SOURCE1','From source 1','inbound','|','Y','Y',1,0,0,'54547','IRST ENTRYF',to_timestamp('29-07-17 04:08:21.624000000 PM','DD-MM-RR HH12:MI:SSXFF AM'),'ASSIST','Y',to_timestamp('29-07-17 04:08:45.809000000 PM','DD-MM-RR HH12:MI:SSXFF AM'),null,to_timestamp('29-07-17 04:08:54.766000000 PM','DD-MM-RR HH12:MI:SSXFF AM'),null);
+
+--------------------------------------------------------
 --  DDL for Table DFF_VALIDATION
 --------------------------------------------------------
 
