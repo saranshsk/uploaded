@@ -1,0 +1,59 @@
+#!/usr/bin/python
+
+from subprocess import Popen, PIPE
+import cx_Oracle
+import csv
+import sys
+
+column_string=""
+values_string=""
+insert_query_1=""
+var=","
+csv.field_size_limit(sys.maxsize)
+with open('inbound/test_file_20170723.txt',"r") as csvfile:
+    datareader = csv.reader(csvfile)
+    count = 0
+    lines=[]
+    for line in datareader:
+        column_string=""
+        values_string=""
+        if count < 10:
+            #lines.append(line)
+            lines=line
+            count += 1
+            print lines
+            print(count)
+            print "Executing the above command for extracting the column count from the file"
+            column_count = 4
+            for x in range(1, column_count+1):
+                if x < column_count:
+                    column_string = column_string+'c'+str(x)+','
+                    values_string = values_string+':'+str(x)+','
+                if  x==column_count:
+                    column_string = column_string+'c'+str(x)
+                    values_string = values_string+':'+str(x)
+            print column_string
+            print values_string
+            insert_query_1 = "insert into table1 (" + column_string + ") values ( " + values_string +")"
+            print insert_query_1
+            repo_db_conn = cx_Oracle.connect ( 'metadata/METADATA@xe' )
+            cur=repo_db_conn.cursor()
+            print(line)
+            cur.executemany(insert_query_1,lines)
+            repo_db_conn.commit()
+            cur.close()
+            
+            
+            >>> import sys
+>>> print("%x" % sys.maxsize)
+7fffffffffffffff
+>>> import platform
+>>> print platform.architecture
+<function architecture at 0x7f0fc81bfcf8>
+>>> print platform.architecture()[0]
+64bit
+>>> 
+>>> import ctypes
+>>> print ctypes.sizeof(ctypes.c_voidp)
+8
+>>> 
